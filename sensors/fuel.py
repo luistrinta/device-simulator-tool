@@ -9,19 +9,24 @@ class V1():
     name="Fuel Type"
     
     def generate_telemetry():
-        fuel_start = 1000 -random.randint(0,1000)
-        time = int(datetime.datetime.now().timestamp())
+        fuel_start = 1000 -random.randint(0,750)
+        time = datetime.datetime.now()
         vbat= 4561
         csq = random.randint(0,31)
+        array_of_registers = []
+        is_full_resquest = random.randint(0,23) > 22
+        if not is_full_resquest:
+            array_of_registers.append({"ts": int(time.timestamp()), "measure(mA*100)": fuel_start})
+        else:
+            for i in range(0,23):
+                        array_of_registers.append({"ts": int(time.timestamp()), "measure(mA*100)": fuel_start})
+                        fuel_start = fuel_start -random.randint(0,10)
+                        time = time - datetime.timedelta(hours=1)
+                        print(time)
         message={
                     
             "data": {
-                "data_channel_1": [
-                    {
-                        "ts": time,
-                        "measure(mA*100)": fuel_start
-                    }
-                ],
+                "data_channel_1": array_of_registers,
                 "write_key": "13C193B1DB0558E7",
                 "vbat": vbat,
                 "csq": csq,
@@ -37,3 +42,6 @@ class V1():
         
         
         return Message(json.dumps(message))
+    
+    
+    

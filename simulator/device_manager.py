@@ -1,6 +1,6 @@
 import json
 import os
-from .device import Device
+from simulator.device import Device
 from iothub import iot_hub_manager
 import threading
 

@@ -9,6 +9,9 @@ class V1():
   def generate_telemetry():
         message={
           "data": {
+                    "year": datetime.datetime.now().year,
+                    "month": datetime.datetime.now().month,
+                    "day": datetime.datetime.now().day,
                     "csq": 15 + random.randint(3,20),
                     "pcpm25": random.randint(0,5),
                     "pcpm10": random.randint(0,5),

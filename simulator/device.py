@@ -1,6 +1,7 @@
 from azure.iot.device import IoTHubDeviceClient
 import time
 from sensors import default
+import random 
 
 class Device():
     
@@ -18,8 +19,9 @@ class Device():
         print(f"Starting device {self.sensor_name}")
         try:
             while not self.stop_requested:
+                
                 payload = self.sensor.generate_telemetry()
-                print(f"\nTelemetry from {self.sensor_name}:\n======================\n{payload}\n======================\n")
+                print(f"\nTelemetry from {self.sensor_name}:\n\t======================\n{payload}\n\ts======================\n")
                 self.client.send_message(payload)
                 time.sleep(self.interval_s)
         except Exception as e:

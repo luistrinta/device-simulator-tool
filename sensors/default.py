@@ -6,7 +6,8 @@ import datetime
 MSG_TXT = '{{"T":{temperature},"H":{humidity},"time":{time},"meta":{meta}}}'
 
 name = "Energy Sensor"
-def generate_telemetry():
+def generate_telemetry(outlier=False):
+    
     ivl1= 200000 +  random.randint(0,38600)
     ivl2= 200000 +  random.randint(0,40600)
     ivl3= 200000 +  random.randint(0,35900)
@@ -65,7 +66,40 @@ def generate_telemetry():
            "device_type":"EOT-SGE"
        }
     }
-
+    if outlier:
+        MSG_TXT = { 
+    "ivl1": ivl1/100,
+    "ivl2": ivl2/100,
+    "ivl3": ivl3/100,
+    "icl1": icl1/100,
+    "icl2": icl2/100,
+    "icl3": icl3/100,
+    "ipl1": ipl1/100,
+    "ipl2": ipl2/100,
+    "ipl3": ipl3/100,
+    "iprl1": iprl1/100,
+    "iprl2": iprl2/100,
+    "iprl3": iprl3/100,
+    "ipfl1": ipfl1/100,
+    "ipfl2": ipfl2/100,
+    "ipfl3": ipfl3/100,
+    "ivln": None,
+    "i":None,
+    "ip": ip/100,
+    "ipr": ipr/100,
+    "ipf": ipf/100,
+    "cei": cei/100,
+    "ceir":ceir/100,
+    "cee": cee/100,
+    "ceer": ceer/100,
+    "f": 50/100,
+    "time": time,
+    "meta": {
+           "company": "DEV",
+           "protocol_version":1,
+           "device_type":"EOT-SGE"
+       }
+    }
  
    
     return Message(json.dumps(MSG_TXT))
